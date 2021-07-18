@@ -61,3 +61,31 @@ The `RemoteFeedLoader` *has an* `HTTPClient`.
 You cannot instantiate a `RemoteFeedLoader` without an `HTTPClient` instance. The code wouldn't even compile. So that's a strong dependency.
 
 The `RemoteFeedLoader` depends on an `HTTPClient` to exist.
+
+### 4. Dashed line, filled head = "depends on" (weak dependency)
+![3_0_dashed_line_filled_head](https://user-images.githubusercontent.com/25435000/126058925-abd25d37-2358-46f5-8963-09781c30ba67.png)
+
+A dashed line with a filled head denotes a weak dependency.
+
+It's important to note that a type can depend on and use another but still work without one.
+
+For example:
+
+```swift
+class RemoteFeedLoader {
+  func load(with client: HTTPClient) {
+    client.doSomething()
+  }
+}
+```
+
+![3_1_weak_dependency](https://user-images.githubusercontent.com/25435000/126058941-8aefd8d6-0ffa-4710-a54f-3473d8448bc4.png)
+
+The `RemoteFeedLoader` has a source code dependency to the `HTTPClient` because it references and uses it. But it doesn't require an `HTTPClient` instance to exist.
+
+You can create a `RemoteFeedLoader` without an `HTTPClient`.
+
+That's considered a weaker dependency, but still a dependency!
+
+The `RemoteFeedLoader` *uses an* `HTTPClient` dependency in the load method. But it doesn't *have* one. It must be provided as a parameter.
+
