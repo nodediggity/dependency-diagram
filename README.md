@@ -35,3 +35,29 @@ class URLSessionHTTPClient: HTTPClient { ... }
 
 The `URLSessionHTTPClient` conforms to the `HTTPClient` protocol.
 
+### 3. Solid line, filled head = "depends on" / "has a" (strong dependency)
+![2_0_solid_line_filled_head](https://user-images.githubusercontent.com/25435000/126058841-409698ae-af39-44fc-bc7b-0bf1d3f132d7.png)
+
+A solid line with a filled head denotes a strong dependency.
+
+When a type instance depends on another type instance to exist, it's considered a stronger dependency, such as Association, Aggregation, and Composition.
+
+For example:
+
+```swift
+class RemoteFeedLoader {
+  private let client: HTTPClient
+
+  init(client: HTTPClient) {
+    self.client = client
+  }
+}
+```
+
+![2_1_strong_dependency](https://user-images.githubusercontent.com/25435000/126058872-5dd52ad6-425d-4cd6-9100-e1656f2946f2.png)
+
+The `RemoteFeedLoader` *has an* `HTTPClient`.
+
+You cannot instantiate a `RemoteFeedLoader` without an `HTTPClient` instance. The code wouldn't even compile. So that's a strong dependency.
+
+The `RemoteFeedLoader` depends on an `HTTPClient` to exist.
